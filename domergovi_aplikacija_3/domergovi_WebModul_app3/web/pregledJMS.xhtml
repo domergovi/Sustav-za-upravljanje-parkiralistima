@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Pregled JMS</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
+                    Domagoj Ergović - NWTiS &copy; 2018.
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Izbornik" collapsible="true">
+                    <p:menu>
+                        <p:menuitem value="Pregled JMS" url="http://localhost:8080/domergovi_WebModul_app3/faces/pregledJMS.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h1 style="text-align: center;">Pregled JMS poruka - email</h1>
+                    <h:form id="formaPoruke">
+                        <p:dataTable id="tablicaJMS" var="JMSporuka" value="#{pregledJMS.listaJMSPoruka}">
+                            <p:column headerText="Broj poruke">
+                                <h:outputText value="#{JMSporuka.redniBrojJMSPoruke}" />
+                            </p:column>
+
+                            <p:column headerText="Vrijeme slanja prethodne">
+                                <h:outputText value="#{JMSporuka.vrijemeSlanjaPrethodneJmsPoruke}" />
+                            </p:column>
+
+                            <p:column headerText="Vrijeme slanja">
+                                <h:outputText value="#{JMSporuka.vrijemeSlanjaTrenutneJMSPoruke}" />
+                            </p:column>
+
+                            <p:column headerText="Trajanje iteracije">
+                                <h:outputText value="#{JMSporuka.vrijemeRadaIteracijeDretve}" />
+                            </p:column>
+
+                            <p:column headerText="Br. NWTIS poruka">
+                                <h:outputText value="#{JMSporuka.brojNWTISPoruka}" />
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:commandButton style="margin-top: 2%;" value="Prikaži podatke" action="#{pregledJMS.dohvatiJMSPoruke()}" update=":formaPoruke:tablicaJMS"/>
+                        <p:commandButton style="margin-top: 2%;" value="Obriši podatke" action="#{pregledJMS.obrisiSveJMSPoruke()}" update=":formaPoruke:tablicaJMS"/>
+
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+
+
