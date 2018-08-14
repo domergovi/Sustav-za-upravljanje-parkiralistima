@@ -1,0 +1,34 @@
+body{
+    background-color: lightgrey;
+}
+
+#formaPrijava{
+    margin-left: 25%; 
+    width: 50%;
+    margin-top: 10%;
+}
+
+#panelPrijava{
+    align-content: center;
+}
+
+.panelStavke{
+    margin-left: 15%;
+}
+
+.tipkaPrijava{
+    margin-top: 3%;
+    margin-left: 48%;
+}
+
+.stupacTablice{
+    text-align: center;
+}
+
+.tipkaPregledDnevnika{
+    margin-left: 11.5%;
+}
+
+.tablicaPodatakaDnevnika{
+    margin-top: 3%;
+}

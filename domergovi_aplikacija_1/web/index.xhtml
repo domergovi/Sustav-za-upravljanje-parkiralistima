@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <h:outputStylesheet library="css" name="domergovi.css"/>
+                <title>Prijava</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
+                    Domagoj Ergović - NWTiS &copy; 2018.
+                </p:layoutUnit>
+                
+                <p:layoutUnit position="west" size="175" header="Izbornik" collapsible="true">
+                    <p:menu>
+                        <p:menuitem value="Prijava" url="http://localhost:8084/domergovi_aplikacija_1/faces/index.xhtml" />
+                        <p:menuitem value="Pregled korisnika" url="http://localhost:8084/domergovi_aplikacija_1/faces/pregledKorisnika.xhtml" />
+                        <p:menuitem value="Pregled dnevnika" url="http://localhost:8084/domergovi_aplikacija_1/faces/pregledDnevnika.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                  
+                    
+                    <h:form id="formaPrijava">
+                        <p:panel id="panel" header="Prijava u sustav">
+
+                            <h:panelGrid styleClass="panelStavke" columns="2" cellpadding="5">
+                                <p:outputLabel for="korisnickoIme" value="Korisničko ime:" />
+                                <p:inputText id="korisnickoIme" value="" required="true" label="KorisnickoIme">
+                                </p:inputText>
+
+                                <p:outputLabel for="lozinka" value="Lozinka:" />
+                                <p:inputText id="lozinka" value="" label="Lozinka" required="true">
+                                </p:inputText>
+                            </h:panelGrid>
+
+                            <p:commandButton styleClass="tipkaPrijava" value="Prijava" update="panel" icon="ui-icon-check" />
+                        </p:panel>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

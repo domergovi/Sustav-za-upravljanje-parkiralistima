@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <h:outputStylesheet library="css" name="domergovi.css"/>
+                <title>Pregled dnevnika</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
+                    Domagoj Ergović - NWTiS &copy; 2018.
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Izbornik" collapsible="true">
+                    <p:menu>
+                        <p:menuitem value="Prijava" url="http://localhost:8084/domergovi_aplikacija_1/faces/index.xhtml" />
+                        <p:menuitem value="Pregled korisnika" url="http://localhost:8084/domergovi_aplikacija_1/faces/pregledKorisnika.xhtml" />
+                        <p:menuitem value="Pregled dnevnika" url="http://localhost:8084/domergovi_aplikacija_1/faces/pregledDnevnika.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <h:form>
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <p:outputLabel for="odDatuma" value="Od datuma:" />
+                            <p:inputText id="odDatuma" value="#{pregledDnevnika.odDatuma}" placeholder="yyyy-MM-dd HH:mm:ss.S"></p:inputText>
+                            <br/>
+                            <p:outputLabel for="doDatuma" value="Do datuma:" />
+                            <p:inputText id="doDatuma" value="#{pregledDnevnika.doDatuma}" placeholder="yyyy-MM-dd HH:mm:ss.S"></p:inputText>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" cellpadding="5" style="margin-left: 4%;">
+                            <p:outputLabel for="vrstaZapisa" value="Vrsta:" />
+                            <p:inputText id="vrstaZapisa" value="#{pregledDnevnika.vrstaZapisa}"></p:inputText>
+                        </h:panelGrid>
+                        
+                        <p:commandButton styleClass="tipkaPregledDnevnika" value="Pretraži dnevnik" action="#{pregledDnevnika.dohvatiPodatkeDnevnikaIzBaze()}" update="tablicaDnevnik"/>
+
+                        <p:dataTable styleClass="tablicaPodatakaDnevnika" id="tablicaDnevnik" var="dnevnik" value="#{pregledDnevnika.listaPodatakaDnevnika}" 
+                                     rows="#{pregledDnevnika.brojPodatakaZaPrikaz}" paginator="true">
+                            <p:column headerText="ID">
+                                <h:outputText value="#{dnevnik.id}" />
+                            </p:column>
+
+                            <p:column headerText="URL">
+                                <h:outputText style="word-break: break-all;" value="#{dnevnik.url}"/>
+                            </p:column>
+
+                            <p:column headerText="IP ADRESA">
+                                <h:outputText value="#{dnevnik.ipAdresa}" />
+                            </p:column>
+
+                            <p:column headerText="VRIJEME PRIJEMA">
+                                <h:outputText value="#{dnevnik.vrijemePrijema}" />
+                            </p:column>
+
+                            <p:column headerText="TRAJANJE">
+                                <h:outputText value="#{dnevnik.trajanje}" />
+                            </p:column>
+                            
+                            <p:column headerText="KORISNICKO IME">
+                                <h:outputText value="#{dnevnik.korisnickoIme}" />
+                            </p:column>
+                            
+                            <p:column headerText="SADRZAJ">
+                                <h:outputText style="word-break: break-all;" value="#{dnevnik.sadrzaj}" />
+                            </p:column>
+                            
+                            <p:column headerText="VRSTA">
+                                <h:outputText value="#{dnevnik.vrsta}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+
