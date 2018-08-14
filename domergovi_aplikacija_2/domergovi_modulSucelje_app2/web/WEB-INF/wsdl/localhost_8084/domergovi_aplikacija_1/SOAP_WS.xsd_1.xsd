@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.6-1b01  svn-revision#13094. --><xs:schema xmlns:tns="http://serveri.ws.domergovi.nwtis.foi.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://serveri.ws.domergovi.nwtis.foi.org/">
+
+<xs:element name="dajPosljednjihNMeteoPodataka" type="tns:dajPosljednjihNMeteoPodataka"/>
+
+<xs:element name="dajPosljednjihNMeteoPodatakaResponse" type="tns:dajPosljednjihNMeteoPodatakaResponse"/>
+
+<xs:element name="dajSveMeteoPodatkeUIntervalu" type="tns:dajSveMeteoPodatkeUIntervalu"/>
+
+<xs:element name="dajSveMeteoPodatkeUIntervaluResponse" type="tns:dajSveMeteoPodatkeUIntervaluResponse"/>
+
+<xs:element name="dajVazeceMeteoPodatke" type="tns:dajVazeceMeteoPodatke"/>
+
+<xs:element name="dajVazeceMeteoPodatkeResponse" type="tns:dajVazeceMeteoPodatkeResponse"/>
+
+<xs:element name="dajZadnjeMeteoPodatke" type="tns:dajZadnjeMeteoPodatke"/>
+
+<xs:element name="dajZadnjeMeteoPodatkeResponse" type="tns:dajZadnjeMeteoPodatkeResponse"/>
+
+<xs:complexType name="dajSveMeteoPodatkeUIntervalu">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+<xs:element name="idParkiralista" type="xs:int"/>
+<xs:element name="odDatuma" type="xs:string" minOccurs="0"/>
+<xs:element name="doDatuma" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajSveMeteoPodatkeUIntervaluResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="meteoPodaci">
+<xs:sequence>
+<xs:element name="cloudsName" type="xs:string" minOccurs="0"/>
+<xs:element name="cloudsValue" type="xs:int"/>
+<xs:element name="humidityUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="humidityValue" type="xs:float" minOccurs="0"/>
+<xs:element name="lastUpdate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="precipitationMode" type="xs:string" minOccurs="0"/>
+<xs:element name="precipitationUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="precipitationValue" type="xs:float" minOccurs="0"/>
+<xs:element name="pressureUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="pressureValue" type="xs:float" minOccurs="0"/>
+<xs:element name="sunRise" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="sunSet" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="temperatureMax" type="xs:float" minOccurs="0"/>
+<xs:element name="temperatureMin" type="xs:float" minOccurs="0"/>
+<xs:element name="temperatureUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="temperatureValue" type="xs:float" minOccurs="0"/>
+<xs:element name="visibility" type="xs:string" minOccurs="0"/>
+<xs:element name="weatherIcon" type="xs:string" minOccurs="0"/>
+<xs:element name="weatherNumber" type="xs:int"/>
+<xs:element name="weatherValue" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirectionCode" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirectionName" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirectionValue" type="xs:float" minOccurs="0"/>
+<xs:element name="windSpeedName" type="xs:string" minOccurs="0"/>
+<xs:element name="windSpeedValue" type="xs:float" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajVazeceMeteoPodatke">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+<xs:element name="idParkiralista" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajVazeceMeteoPodatkeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajZadnjeMeteoPodatke">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+<xs:element name="idParkiralista" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajZadnjeMeteoPodatkeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajPosljednjihNMeteoPodataka">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+<xs:element name="idParkiralista" type="xs:int"/>
+<xs:element name="brojPodataka" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajPosljednjihNMeteoPodatakaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
+        
+    
+    <enterprise-beans>
+        <session>
+            <ejb-name>SingletonEmailZrno</ejb-name>
+            <env-entry>
+                <env-entry-name>mail.imap.port</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>143</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>mail.usernameThread</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>servis@nwtis.nastava.foi.hr</env-entry-value>
+            </env-entry>   
+            <env-entry>
+                <env-entry-name>mail.passwordThread</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>123456</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>mail.timeSecThreadCycle</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>60</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>mail.attachmentFilename</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>NWTiS_privitak.json</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>mail.usernameEmailAddress</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>admin@nwtis.nastava.foi.hr</env-entry-value>
+            </env-entry>    
+            <env-entry>
+                <env-entry-name>mail.subjectEmail</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>IOT poruka</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>mail.folderNWTiS</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>NWTiS domergovi poruke</env-entry-value>
+            </env-entry>
+            <env-entry>
+                <env-entry-name>mail.server</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>127.0.0.1</env-entry-value>
+            </env-entry>
+        </session>
+    </enterprise-beans>
+</ejb-jar>

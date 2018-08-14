@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.locale}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{p['index.veza_registracija']}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
+                    Domagoj Ergović - NWTiS &copy; 2018.
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200" header="#{p['index.izbornik']}" collapsible="true">
+                    <h:form>
+                        <p:menubar>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.veza_pocetnaStranica']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/index.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.veza_registracija']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/registracija.xhtml"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.veza_prijava']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/prijava.xhtml" disabled="#{!prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.pregledStatusa']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledStatusa.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.vezaPregledParkiralista']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledParkiralista.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.vezaPregledEmaila']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledEmaila.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.vezaPregledDnevnika']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledDnevnika.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                        </p:menubar>
+                    </h:form>    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <h:form>
+                        <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"></p:messages>
+                    </h:form>
+
+                    <p:separator />
+
+                    <h:form id="formaRegistracija" style="width: 40%; clear: left;">
+                        <p:panel id="panel" header="#{p['index.veza_registracija']} | #{p['index.azurirajPodatke']}">
+
+                            <h:panelGrid styleClass="panelRegistracija" columns="2" cellpadding="5" style="margin-left: 2%">
+                                <p:outputLabel for="ime" value="#{p['index.ime']}:" />
+                                <p:inputText id="ime" value="#{registracija.ime}" label="ime" ></p:inputText>
+
+                                <p:outputLabel for="prezime" value="#{p['index.prezime']}:" />
+                                <p:inputText id="prezime" value="#{registracija.prezime}" label="prezime" ></p:inputText>
+
+                                <p:outputLabel for="korisnickoIme" value="#{p['index.korisnickoIme']}:"/>
+                                <p:inputText id="korisnickoIme" value="#{registracija.korisnickoIme}"  label="korisnickoIme"></p:inputText>
+
+                                <p:outputLabel for="email" value="#{p['index.email']}:" />
+                                <p:inputText id="email" value="#{registracija.email}" label="email"></p:inputText>
+
+                                <p:outputLabel for="lozinka" value="#{p['index.lozinka']}:" />
+                                <p:inputText id="lozinka" value="#{registracija.lozinka}" label="lozinka"></p:inputText>
+
+                                <p:outputLabel for="ponovljenaLozinka" value="#{p['index.ponovljenaLozinka']}:" />
+                                <p:inputText id="ponovljenaLozinka" value="#{registracija.ponovljenaLozinka}" label="ponovljenaLozinka" ></p:inputText>
+
+                            </h:panelGrid>
+
+                            <h:panelGrid id="tipkeRegAzu" columns="2" style="margin-left: 10%">
+                                <p:commandButton value="#{p['index.registrirajSe']}" actionListener="#{registracija.registrirajKorisnika()}" update="panel" ajax="false" disabled="#{!prijava.korisnikPrijavljen}"/>
+                                <p:commandButton value="#{p['index.azurirajPodatke']}" actionListener="#{registracija.azurirajPodatkeKorisnika()}" update="panel" ajax="false" disabled="#{prijava.korisnikPrijavljen}"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+
+                    <h:form>
+                        <p:commandButton value="#{p['index.prikaziKorisnike']}" style="margin-left: 85%;" action="#{registracija.dohvatiSveKorisnike()}" update="tablicaKorisnika" disabled="#{prijava.korisnikPrijavljen}"/>
+                        <p:dataTable id="tablicaKorisnika" rows="#{registracija.brojRedovaZaPrikaz}" paginator="true" var="korisnik" value="#{registracija.listaKorisnika}" style="margin-top: 1%">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{korisnik.id}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.ime']}">
+                                <h:outputText value="#{korisnik.ime}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.prezime']}">
+                                <h:outputText value="#{korisnik.prezime}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.korisnickoIme']}">
+                                <h:outputText value="#{korisnik.korisnicko_ime}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

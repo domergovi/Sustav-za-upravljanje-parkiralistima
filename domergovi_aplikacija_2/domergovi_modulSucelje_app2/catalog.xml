@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8084/domergovi_aplikacija_1/SOAP_WS?wsdl" uri="src/conf/xml-resources/web-service-references/SOAP_WS/wsdl/localhost_8084/domergovi_aplikacija_1/SOAP_WS.wsdl"/>
+    <system systemId="http://localhost:8084/domergovi_aplikacija_1/SOAP_WS?xsd=1" uri="src/conf/xml-resources/web-service-references/SOAP_WS/wsdl/localhost_8084/domergovi_aplikacija_1/SOAP_WS.xsd_1.xsd"/>
+</catalog>

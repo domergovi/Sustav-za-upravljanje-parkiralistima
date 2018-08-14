@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html" locale="#{lokalizacija.locale}">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>#{p['index.vezaPregledParkiralista']}</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
+                    Domagoj Ergović - NWTiS &copy; 2018.
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200" header="#{p['index.izbornik']}" collapsible="true">
+                    <h:form>
+                        <p:menubar>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.veza_pocetnaStranica']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/index.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.veza_registracija']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/registracija.xhtml"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.veza_prijava']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/prijava.xhtml" disabled="#{!prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.pregledStatusa']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledStatusa.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.vezaPregledParkiralista']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledParkiralista.xhtml" disabled="#{!prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.vezaPregledEmaila']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledEmaila.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                            <p:separator/>
+                            <p:menuitem value="#{p['index.vezaPregledDnevnika']}" url="http://localhost:8080/domergovi_modulSucelje_app2/faces/pregledDnevnika.xhtml" disabled="#{prijava.korisnikPrijavljen}"/>
+                        </p:menubar>
+                    </h:form>    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <h:form>
+                        <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"></p:messages>
+                    </h:form>
+
+                    <p:separator />
+
+                    <h:form id="formaParkiralista">
+                        <p:panel id="panel" header="#{p['index.parkiralista']}">
+
+                            <h:panelGrid styleClass="panelParkiralista" columns="2" cellpadding="5" style="margin-left: 2%">
+                                <p:outputLabel for="id" value="ID:" />
+                                <p:inputText id="id" value="#{pregledParkiralista.id}" label="id" ></p:inputText>
+
+                                <p:outputLabel for="naziv" value="#{p['index.parkiralisteNaziv']}:" />
+                                <p:inputText id="naziv" value="#{pregledParkiralista.naziv}" label="naziv" ></p:inputText>
+
+                                <p:outputLabel for="adresa" value="#{p['index.parkiralisteAdresa']}:"/>
+                                <p:inputText id="adresa" value="#{pregledParkiralista.adresa}" label="adresa"></p:inputText>
+
+                                <p:outputLabel for="brojParkirnihMjesta" value="#{p['index.brojParkirnihMjesta']}:" />
+                                <p:inputText id="brojParkirnihMjesta" value="#{pregledParkiralista.brojParkirnihMjesta}" label="brojParkirnihMjesta"></p:inputText>
+
+                                <p:outputLabel for="brojUlaznoIzlaznihMjesta" value="#{p['index.brojUlaznoIzlaznihMjesta']}:" />
+                                <p:inputText id="brojUlaznoIzlaznihMjesta" value="#{pregledParkiralista.brojUlaznoIzlaznihMjesta}" label="brojUlaznoIzlaznihMjesta"></p:inputText>
+
+                            </h:panelGrid>
+                            
+                            <p:separator />
+                            
+                            <h:panelGrid id="tipkeDodajAzuriraj" columns="7">
+                                <h2>AKCIJE:</h2>
+                                <p:commandButton value="#{p['index.parkiralisteDodaj']}" action="#{pregledParkiralista.dodajNovoParkiraliste()}" update="panel" />
+                                <p:commandButton value="#{p['index.parkiralisteAzuriraj']}" actionListener="#{pregledParkiralista.azurirajParkiraliste()}" update="panel :formaParking:tablicaParkiralista" />
+                                <p:commandButton value="#{p['index.parkiralisteObriši']}" actionListener="#{pregledParkiralista.obrisiParkiraliste()}" update="panel :formaParking:tablicaParkiralista" />
+                                <p:commandButton value="#{p['index.aktivirajParkiraliste']}" update="panel" actionListener="#{pregledParkiralista.aktivirajParkiraliste()}"/>
+                                <p:commandButton value="#{p['index.blokirajParkiraliste']}" update="panel" actionListener="#{pregledParkiralista.blokirajParkiraliste()}"/>
+                                <p:commandButton value="#{p['index.statusParkiralista']}" update="panel" actionListener="#{pregledParkiralista.dajStatusParkiralista()}"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+                    
+                    
+                    <h:form id="formaParking" style="margin-top: 2%;">
+                        <p:commandButton value="#{p['index.parkiralistePrikaziParkiralista']}" update="tablicaParkiralista" action="#{pregledParkiralista.dohvatiSvaParkiralista()}"/>
+                        <p:commandButton value="#{p['index.prebaciPodatke']}" action="#{pregledParkiralista.preuzmiPodatkeParkiralista()}" update=":formaParkiralista"/>
+                        <p:dataTable id="tablicaParkiralista" rows="#{pregledParkiralista.brojRedovaZaPrikaz}" paginator="true" 
+                                     var="parkiraliste" value="#{pregledParkiralista.listaParkiralista}" style="margin-top: 1%" selectionMode="single" 
+                                     selection="#{pregledParkiralista.odabranoParkiraliste}" rowKey="#{parkiraliste.id}">
+                            
+                            <p:ajax event="rowSelect" listener="#{pregledParkiralista.naOdabranoParkiraliste}" update=":formaMeteo:tablicaMeteo :formaMeteoZadnje:tablicaMeteoZadnji" />
+                            <p:ajax event="rowUnselect" listener="#{pregledParkiralista.naOdznacenoParkiraliste}" update=":formaMeteo:tablicaMeteo :formaMeteoZadnje:tablicaMeteoZadnji" />
+                            
+                            <p:column headerText="ID">
+                                <h:outputText value="#{parkiraliste.id}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.parkiralisteNaziv']}">
+                                <h:outputText value="#{parkiraliste.naziv}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.parkiralisteAdresa']}">
+                                <h:outputText value="#{parkiraliste.adresa}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.brojParkirnihMjesta']}">
+                                <h:outputText value="#{parkiraliste.brojParkirnihMjesta}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.brojUlaznoIzlaznihMjesta']}">
+                                <h:outputText value="#{parkiraliste.brojUlaznoIzlaznihMjesta}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    
+
+                    <h:form id="formaMeteo" style="margin-top: 5%">
+                        <h1 style="text-align: left">#{p['index.vazeciMeteoPodaci']}</h1>
+                        <p:dataTable id="tablicaMeteo" rows="#{pregledParkiralista.brojRedovaZaPrikaz}"  paginator="true" var="meteo" value="#{pregledParkiralista.listaMeteoPodataka}" style="margin-top: 1%">
+                            <p:column headerText="#{p['index.temperatura']}">
+                                <h:outputText value="#{meteo.temperatureValue}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.vlaga']}">
+                                <h:outputText value="#{meteo.humidityValue}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.tlak']}">
+                                <h:outputText value="#{meteo.pressureValue}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.maksTemp']}">
+                                <h:outputText value="#{meteo.temperatureMax}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.minTemp']}">
+                                <h:outputText value="#{meteo.temperatureMin}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.datum']}">
+                                <h:outputText value="#{meteo.lastUpdate}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    
+                    
+                    <h:form id="formaMeteoZadnje" style="margin-top: 5%">
+                        <h1 style="text-align: left">#{p['index.zadnjiMeteoPodaci']}</h1>
+                        <p:dataTable id="tablicaMeteoZadnji" rows="#{pregledParkiralista.brojRedovaZaPrikaz}"  paginator="true" var="meteo" value="#{pregledParkiralista.listaMeteoPodatakaZadnje}" style="margin-top: 1%">
+                            <p:column headerText="#{p['index.temperatura']}">
+                                <h:outputText value="#{meteo.temperatureValue}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.vlaga']}">
+                                <h:outputText value="#{meteo.humidityValue}" />
+                            </p:column>
+
+                            <p:column headerText="#{p['index.tlak']}">
+                                <h:outputText value="#{meteo.pressureValue}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.maksTemp']}">
+                                <h:outputText value="#{meteo.temperatureMax}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.minTemp']}">
+                                <h:outputText value="#{meteo.temperatureMin}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{p['index.datum']}">
+                                <h:outputText value="#{meteo.lastUpdate}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
